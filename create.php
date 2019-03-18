@@ -1,0 +1,61 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: Black
+ * Date: 3/18/2019
+ * Time: 11:20 PM
+ */
+include "conn.php";
+//check name already exit if exit == true
+function checkName($name,$conn){
+    $sql = "SELECT *FROM student WHERE studentName='".$name."'";
+    $result = mysqli_query($conn, $sql);
+    if(mysqli_num_rows($result)>0)
+        return true;
+    else
+        return false;
+}
+
+//upload image to dir photos
+function uploadPhoto($name){
+    $oldpath = $_FILES['photo']['tmp_name'];
+    $newpath ="photos/".$name.".jpg";
+    move_uploaded_file($oldpath, $newpath);
+}
+
+//getlast studentId
+function getLastId($conn ){
+    $sql = "SELECT *FROM student ORDER BY studentId DESC";
+    $result = mysqli_query($conn, $sql);
+    if(mysqli_num_rows($result)>0) {
+        $row = mysqli_fetch_assoc($result);
+        return $row['studentId'];
+    }
+    else
+       return 0;
+}
+
+//Insert Data to database
+function addData($conn){
+    $lastId=getLastId($conn);
+    $photoName=$_POST['studentName'].($lastId+1);
+    $sql="INSERT INTO student (studentName, bithDate,address,photoName)
+    VALUES ('".$_POST['studentName']."', '".$_POST['birthDate']."', '".$_POST['address']."','photos/".$photoName."')";
+    if (mysqli_query($conn, $sql)) {
+        echo "<h3>Create Student Successfully</h3>";
+      uploadPhoto($photoName);
+    } else {
+        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+    }
+}
+
+
+if(checkName($_POST['studentName'],$conn)){
+    echo "<h3>Student Information is Already exist</h3>";
+}
+else{
+    addData($conn);
+}
+
+echo "<a href='create.html'>More </a>";
+echo "<a href='display.php'> View</a>";

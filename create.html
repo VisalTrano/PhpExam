@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Create Student</h1>
+    <form action="create.php" method="post" enctype="multipart/form-data">
+        <div>
+            <label for="studentName">Student Name</label>
+            <input type="text" placeholder="Enter student name" id="studentName" name="studentName" required>
+        </div>
+        <div>
+            <label for="birthDate">Birth Date</label>
+            <input type="date"  id="birthDate" name="birthDate" required>
+        </div>
+        <div>
+            <label for="address">Address</label>
+        <textarea  placeholder="Enter student name" id="address" name="address" required></textarea>
+        </div>
+        <div>
+            <label for="photo">Photo</label>
+            <input type="file"  id="photo" name="photo" required>
+        </div>
+        <button type="submit">Create Student</button>
+    </form>
+</body>
+</html>
