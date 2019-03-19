@@ -1,0 +1,22 @@
+/*
+MySQL Backup
+Database: examdb
+Backup Time: 2019-03-19 17:53:50
+*/
+
+SET FOREIGN_KEY_CHECKS=0;
+DROP TABLE IF EXISTS `examdb`.`student`;
+CREATE TABLE `student` (
+  `studentId` int(11) NOT NULL AUTO_INCREMENT,
+  `studentName` varchar(255) DEFAULT NULL,
+  `bithDate` date DEFAULT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  `photoName` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`studentId`)
+) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+BEGIN;
+LOCK TABLES `examdb`.`student` WRITE;
+DELETE FROM `examdb`.`student`;
+INSERT INTO `examdb`.`student` (`studentId`,`studentName`,`bithDate`,`address`,`photoName`) VALUES (12, 'Visal', '2019-03-22', 'pp', 'photos/29552-4-anime-girl-photo-thumb.png'),(11, 'smey', '2019-03-14', 'pp', 'photos/download.jpg'),(10, 'Visal', '2019-03-14', 'pp', 'photos/download.jpg'),(13, 'dara', '2019-03-14', 'pp', 'photos/dab2d405730473923d33a32e814950cd.jpg');
+UNLOCK TABLES;
+COMMIT;
